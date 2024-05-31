@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:54:36 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/05/31 16:54:24 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:30:37 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-long	ft_atoi(const char *str);
+long	ft_atoi2(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_isalnum(int c);

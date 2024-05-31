@@ -6,13 +6,13 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 17:58:43 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/05/31 16:54:05 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:32:09 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atoi(const char *str)
+long	ft_atoi2(const char *str)
 {
 	long	resultat;
 	long	signe;
