@@ -35,8 +35,8 @@ SRCS =	ft_atoi.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
-		ft_putnbr_fd.c
-BONUS = ft_lstnew_bonus.c \
+		ft_putnbr_fd.c \
+		ft_lstnew_bonus.c \
 		ft_lstadd_front_bonus.c \
 		ft_lstsize_bonus.c \
 		ft_lstlast_bonus.c \
@@ -49,32 +49,32 @@ BONUS = ft_lstnew_bonus.c \
 
 HEADER = libft.h
 
-#Creating object files(.o files)
-
+# Creating object files (.o files)
 OBJ = $(SRCS:%.c=%.o)
 
-#Same but for bonus files
+# Compile each .c file into a .o file
+%.o: %.c
+	@gcc -Wextra -Wall -Werror -c $< -o $@
 
+# Same but for bonus files
 OBJBONUS = $(BONUS:%.c=%.o) $(OBJ)
 
-#Launching variable NAME
+# Launching variable NAME
+all: ${NAME}
 
-all : ${NAME}
-
-#Creating an archive composed of the .o files
-
-${NAME}:	${OBJ}
-		ar rcs ${NAME} ${OBJ}
+# Creating an archive composed of the .o files
+${NAME}: ${OBJ}
+	@ar rcs ${NAME} ${OBJ}
 
 #Removes every .o files
 
 clean :	
-		rm -f ${OBJ} ${OBJBONUS}
+		@rm -f ${OBJ} ${OBJBONUS}
 
 #Removes every .o file and the .a file
 
 fclean : clean
-		rm -f ${NAME}
+		@rm -f ${NAME}
 
 #Removes every .o file, the .a file and recreates everything (useful if an update is needed)
 

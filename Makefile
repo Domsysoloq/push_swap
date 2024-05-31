@@ -1,33 +1,35 @@
 CC = gcc
-CFLAGS = -Wextra -Wall -Werror
+CFLAGS = -Wextra -Wall -Werror -Iincludes
 NAME = push_swap
 SRCS =	$(wildcard src/*.c utils/*.c)
 CHECK_SRCS = $(wildcard utils/*.c) src/in
 
-#Creating object files(.o files)
-
+# Creating object files (.o files)
 OBJS = $(SRCS:.c=.o)
 
-#Launching variable NAME
+# Compile each .c file into a .o file
+%.o: %.c
+	@${CC} ${CFLAGS} -c $< -o $@
 
-all : ${NAME}
+# Launching variable NAME
+all: ${NAME}
 
-#Creating an archive composed of the .o files
-
+# Creating an archive composed of the .o files
 ${NAME}: ${OBJS}
-	make -C ./libft
-	${CC} ${CFLAGS} ${OBJS} ./libft/libft.a -o ${NAME}
+	@make -C ./libft
+	@${CC} ${CFLAGS} ${OBJS} ./libft/libft.a -o ${NAME}
+	@make clean
 
 #Removes every .o files
 
 clean :	
-		make -C ./libft fclean
-		rm -rf ${OBJ}
+		@make -C ./libft fclean
+		@rm -rf ${OBJS}
 
 #Removes every .o file and the .a file
 
 fclean : clean
-		rm -rf ${NAME}
+		@rm -rf ${NAME}
 
 #Removes every .o file, the .a file and recreates everything (useful if an update is needed)
 
