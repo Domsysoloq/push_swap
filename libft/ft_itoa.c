@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:53:51 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/01/20 18:27:48 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:52:57 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,7 @@
 /*#include <stdio.h>
 #include <stdlib.h>*/
 
-
-
-/*int    main(int ac, char **av)
-{
-    (void)ac;
-    printf ("%s\n", ft_itoa(atoi(av[1])));
-    return (0);
-}*/size_t	resultlen(int n)
+size_t	resultlen(int n)
 {
 	size_t	resultlen;
 
@@ -71,3 +64,10 @@ char	*ft_itoa(int n)
 	copyint(result, i, (unsigned int *)&n, resultsize);
 	return (result);
 }
+
+/*int    main(int ac, char **av)
+{
+    (void)ac;
+    printf ("%s\n", ft_itoa(atoi(av[1])));
+    return (0);
+}*/

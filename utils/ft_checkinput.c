@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:56:30 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/05/31 18:17:19 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:46:16 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list	*ft_checkinput(int ac, char **av)
 	long	tmp;
 	t_list	*lst;
 	int		maxlength;
-	
+
 	i = 1;
 	if (ac < 2)
 		ft_error(1);
@@ -39,7 +39,7 @@ t_list	*ft_checkinput(int ac, char **av)
 
 int	ft_isnumber(char *arg, int	*maxlength)
 {
-	int	i;
+	int			i;
 	static int	isitmaxlength = 0;
 
 	i = 0;

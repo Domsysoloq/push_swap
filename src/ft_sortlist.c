@@ -6,13 +6,13 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:02:00 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/05/31 18:16:06 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:53:59 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sortlist(/*t_list **head*/void)
+void	ft_sortlist(t_list **head)
 {
-	
+	return ;
 }

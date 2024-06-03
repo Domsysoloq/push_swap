@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:54:36 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/05/31 17:30:37 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:52:01 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
-
 
 typedef struct s_list
 {
