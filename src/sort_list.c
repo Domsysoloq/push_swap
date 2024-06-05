@@ -6,13 +6,44 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:02:00 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/03 18:53:59 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/05 20:06:28 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sortlist(t_list **head)
+void	ft_sortlist(t_list **stacka)
 {
+	t_list	**stackb;
+
+	stackb = ft_createstackb(stacka);
+	//print_list(*stacka);
+	//print_list(*stackb);
+	if ((ft_lstsize(*stacka) -1 <= 5))
+		ft_sort_short(stacka);
+	else
+		ft_algo(stacka, stackb);
 	return ;
+}
+
+t_list	**ft_createstackb(t_list **stacka)
+{
+	t_list	*head;
+	t_list	*traveller;
+	int		count;
+	t_list	**head_ptr;
+	
+	head_ptr = (t_list **)malloc(sizeof(t_list *));
+	if (!head_ptr)
+    	ft_error(3);
+	count = 0;
+	head = ft_lstnew((long*)0);
+	while (count < (ft_lstsize(*stacka) - 1))
+	{
+		traveller = ft_lstnew((long*)0);
+		ft_lstadd_front(&head, traveller);
+		count++;
+	}
+	*head_ptr = head;
+	return (head_ptr);
 }

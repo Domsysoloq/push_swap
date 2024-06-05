@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 18:36:33 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/03 18:36:46 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:24:51 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	reverse_rotate(t_list **stack)
 	t_list	*head;
 	t_list	*traveller;
 
-	if (ft_lstsize(stack) < 2)
+	if (ft_lstsize(*stack) < 2)
 		return (-1);
 	head = *stack;
 	traveller = ft_lstlast(head);

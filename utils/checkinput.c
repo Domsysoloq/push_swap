@@ -6,19 +6,21 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:56:30 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/03 18:46:16 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:27:01 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*ft_checkinput(int ac, char **av)
+t_list	**ft_checkinput(int ac, char **av)
 {
 	int		i;
 	long	tmp;
 	t_list	*lst;
 	int		maxlength;
+	t_list	**lst_ptr;
 
+	lst_ptr = (t_list **)malloc(sizeof (t_list));
 	i = 1;
 	if (ac < 2)
 		ft_error(1);
@@ -26,15 +28,14 @@ t_list	*ft_checkinput(int ac, char **av)
 	{
 		if (ft_isnumber(av[i], &maxlength) == 1)
 			ft_error(1);
-		printf ("%d\n", maxlength);
 		tmp = ft_atoi(av[i]);
 		if (tmp < -2147483648 || tmp > 2147483647)
 			ft_error(1);
-		lst = ft_filllistA(tmp);
+		lst = ft_filllist_a(tmp);
 		i++;
 	}
-	print_list(lst);
-	return (lst);
+	*lst_ptr = lst;
+	return (lst_ptr);
 }
 
 int	ft_isnumber(char *arg, int	*maxlength)

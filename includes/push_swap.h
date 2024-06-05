@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:09:58 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/03 18:51:40 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/05 20:07:13 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@
 # include <stdio.h>
 
 int		main(int ac, char **av);
-t_list	*ft_filllistA(long arg);
+t_list	*ft_filllist_a(long arg);
 void	ft_error(int code);
 void	print_list(t_list *head);
-t_list	*ft_checkinput(int ac, char **av);
+t_list	**ft_checkinput(int ac, char **av);
 int		ft_isnumber(char *arg, int *maxlength);
 long	ft_atoi(const char *str);
-void	ft_sortlist(t_list **head);
+void	ft_sortlist(t_list **stacka);
+t_list	**ft_createstackb(t_list **stacka);
+void	algo(t_list **stacka, t_list **stackb, int ac);
 
 //swap files
 
