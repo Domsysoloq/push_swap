@@ -3,6 +3,7 @@ CFLAGS = -Wextra -Wall -Werror -Iincludes
 NAME = push_swap
 SRCS =	$(wildcard src/*.c utils/*.c)
 CHECK_SRCS = $(wildcard utils/*.c) src/in
+CFLAGSLLDB = -g -Wextra -Wall -Werror -Iincludes
 
 # Creating object files (.o files)
 OBJS = $(SRCS:.c=.o)
@@ -19,6 +20,13 @@ ${NAME}: ${OBJS}
 	@make -C ./libft
 	@${CC} ${CFLAGS} ${OBJS} ./libft/libft.a -o ${NAME}
 	@make clean
+
+# For testing
+lldb: ${OBJS}
+	@make -C ./libft
+	@${CC} ${CFLAGSLLDB} ${OBJS} ./libft/libft.a -o ${NAME}
+	@make clean
+
 
 #Removes every .o files
 
@@ -37,6 +45,6 @@ re : fclean all
 
 #Necessary to tell to the Makefile that these should not be interpreted as files, but as rules. It allows these rules to be executed no matter what.
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re lldb
 
 

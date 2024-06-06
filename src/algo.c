@@ -6,14 +6,15 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 19:25:22 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/05 20:07:40 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:01:17 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	algo(t_list **stacka, t_list **stackb, int ac)
+void	ft_algo(t_list **stacka, t_list **stackb)
 {
-	
-	return 0;
+	(void) stacka;
+	(void) stackb;
+	return ;
 }

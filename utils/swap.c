@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 18:38:03 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/03 18:38:29 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/06 20:42:26 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@ int	swap(t_list **stack)
 {
 	t_list	*first;
 	t_list	*second;
+	t_list	*tmp;
+	
 
 	if (!(*stack)->next)
 		return (-1);
 	first = *stack;
-	second = first -> next;
-	first -> next = second -> next;
-	second -> next = first;
+	second = first->next;
+	tmp = ft_lstnew(first->content);
+	first->content = second->content;
+	second->content = tmp->content;
+	free(tmp);
 	return (0);
 }
 

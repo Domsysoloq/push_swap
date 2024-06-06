@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:09:58 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/05 20:07:13 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/06 20:02:20 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,15 @@ int		ft_isnumber(char *arg, int *maxlength);
 long	ft_atoi(const char *str);
 void	ft_sortlist(t_list **stacka);
 t_list	**ft_createstackb(t_list **stacka);
-void	algo(t_list **stacka, t_list **stackb, int ac);
+void	ft_algo(t_list **stacka, t_list **stackb);
+
+//sort_short
+
+void	ft_sort_short(t_list **stacka, t_list **stackb);
+void	ft_sort2(t_list **stacka);
+void	ft_sort3(t_list **stacka);
+void	ft_sort4(t_list **stacka, t_list **stackb);
+void	ft_sort5(t_list **stacka, t_list **stackb);
 
 //swap files
 

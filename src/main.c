@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:32:17 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/05 19:53:22 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/06 20:19:08 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac, char **av)
 
 	stacka = ft_checkinput(ac, av);
 	ft_sortlist(stacka);
+	//print_list(*stacka);
 	return (0);
 }
 
