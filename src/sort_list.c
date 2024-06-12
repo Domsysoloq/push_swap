@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:02:00 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/06 20:41:51 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:39:11 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ void	ft_sortlist(t_list **stacka)
 {
 	t_list	**stackb;
 
+	if (ft_issorted(stacka) == 1)
+		ft_error(5);
 	stackb = ft_createstackb(stacka);
 	//print_list(*stacka);
 	//print_list(*stackb);
 	if ((ft_lstsize(*stacka) -1 <= 5))
 		ft_sort_short(stacka, stackb);
-	else
-		ft_algo(stacka, stackb);
+	/*else
+		ft_algo(stacka, stackb);*/
 	//print_list(*stacka);
 	//print_list(*stackb);
 	return ;

@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:09:58 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/06 20:02:20 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:54:47 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ t_list	*ft_filllist_a(long arg);
 void	ft_error(int code);
 void	print_list(t_list *head);
 t_list	**ft_checkinput(int ac, char **av);
-int		ft_isnumber(char *arg, int *maxlength);
+int		ft_isnumber(char *arg);
 long	ft_atoi(const char *str);
 void	ft_sortlist(t_list **stacka);
 t_list	**ft_createstackb(t_list **stacka);
 void	ft_algo(t_list **stacka, t_list **stackb);
+int		ft_issorted(t_list **stack);
 
 //sort_short
 

@@ -18,8 +18,8 @@ all: ${NAME}
 # Creating an archive composed of the .o files
 ${NAME}: ${OBJS}
 	@make -C ./libft
+	@echo "Compiling ${NAME}"
 	@${CC} ${CFLAGS} ${OBJS} ./libft/libft.a -o ${NAME}
-	@make clean
 
 # For testing
 lldb: ${OBJS}
@@ -31,13 +31,13 @@ lldb: ${OBJS}
 #Removes every .o files
 
 clean :	
-		@make -C ./libft fclean
-		@rm -rf ${OBJS}
+	@make -C ./libft fclean
+	@rm -rf ${OBJS}
 
 #Removes every .o file and the .a file
 
 fclean : clean
-		@rm -rf ${NAME}
+	@rm -rf ${NAME}
 
 #Removes every .o file, the .a file and recreates everything (useful if an update is needed)
 

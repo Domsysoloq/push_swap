@@ -64,17 +64,18 @@ all: ${NAME}
 
 # Creating an archive composed of the .o files
 ${NAME}: ${OBJ}
+	@echo "Archiving Libft"
 	@ar rcs ${NAME} ${OBJ}
 
 #Removes every .o files
 
 clean :	
-		@rm -f ${OBJ} ${OBJBONUS}
+	@rm -f ${OBJ} ${OBJBONUS}
 
 #Removes every .o file and the .a file
 
 fclean : clean
-		@rm -f ${NAME}
+	@rm -f ${NAME}
 
 #Removes every .o file, the .a file and recreates everything (useful if an update is needed)
 

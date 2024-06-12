@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checkinput.c                                    :+:      :+:    :+:   */
+/*   checkinput.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:56:30 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/05 17:27:01 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:39:39 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@ t_list	**ft_checkinput(int ac, char **av)
 	int		i;
 	long	tmp;
 	t_list	*lst;
-	int		maxlength;
 	t_list	**lst_ptr;
 
 	lst_ptr = (t_list **)malloc(sizeof (t_list));
-	i = 1;
+	i = 0;
 	if (ac < 2)
 		ft_error(1);
 	while (av[i])
 	{
-		if (ft_isnumber(av[i], &maxlength) == 1)
+		if (ft_isnumber(av[i]) == 1)
 			ft_error(1);
 		tmp = ft_atoi(av[i]);
 		if (tmp < -2147483648 || tmp > 2147483647)
@@ -38,10 +37,9 @@ t_list	**ft_checkinput(int ac, char **av)
 	return (lst_ptr);
 }
 
-int	ft_isnumber(char *arg, int	*maxlength)
+int	ft_isnumber(char *arg)
 {
 	int			i;
-	static int	isitmaxlength = 0;
 
 	i = 0;
 	while (arg[i] != '\0')
@@ -54,11 +52,6 @@ int	ft_isnumber(char *arg, int	*maxlength)
 			i++;
 		else
 			return (1);
-	}
-	if (i > isitmaxlength)
-	{
-		isitmaxlength = i;
-		*maxlength = i;
 	}
 	return (0);
 }
@@ -85,4 +78,21 @@ long	ft_atoi(const char *str)
 		str++;
 	}
 	return (resultat * signe);
+}
+
+int	ft_issorted(t_list **stack)
+{
+	t_list	*head;
+	t_list	*traveller;
+
+	head = *stack;
+	traveller = head->next;
+	while (traveller)
+	{
+		if (head->content > traveller->content)
+			return (0);
+		head = head->next;
+		traveller = traveller->next;
+	}
+	return (1);
 }
