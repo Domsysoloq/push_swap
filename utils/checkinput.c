@@ -6,93 +6,80 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:56:30 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/12 19:39:39 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/09/02 19:51:30 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	**ft_checkinput(int ac, char **av)
+int	check_sorting(t_list **stack1)
 {
-	int		i;
-	long	tmp;
-	t_list	*lst;
-	t_list	**lst_ptr;
+	t_list	*tmp;
 
-	lst_ptr = (t_list **)malloc(sizeof (t_list));
-	i = 0;
-	if (ac < 2)
-		ft_error(1);
-	while (av[i])
+	tmp = *stack1;
+	while (tmp && tmp->next)
 	{
-		if (ft_isnumber(av[i]) == 1)
-			ft_error(1);
-		tmp = ft_atoi(av[i]);
-		if (tmp < -2147483648 || tmp > 2147483647)
-			ft_error(1);
-		lst = ft_filllist_a(tmp);
-		i++;
-	}
-	*lst_ptr = lst;
-	return (lst_ptr);
-}
-
-int	ft_isnumber(char *arg)
-{
-	int			i;
-
-	i = 0;
-	while (arg[i] != '\0')
-	{
-		if (ft_isdigit(arg[i]) == 0)
-			i++;
-		else if (arg[0] == '+')
-			i++;
-		else if (arg[0] == '-')
-			i++;
-		else
-			return (1);
-	}
-	return (0);
-}
-
-long	ft_atoi(const char *str)
-{
-	long	resultat;
-	long	signe;
-
-	signe = 1;
-	resultat = 0;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	if (*str == '-')
-	{
-		signe *= -1;
-		str++;
-	}
-	if (*str == '-' || *str == '+')
-		ft_error(1);
-	while (*str >= '0' && *str <= '9')
-	{
-		resultat = resultat * 10 + *str - '0';
-		str++;
-	}
-	return (resultat * signe);
-}
-
-int	ft_issorted(t_list **stack)
-{
-	t_list	*head;
-	t_list	*traveller;
-
-	head = *stack;
-	traveller = head->next;
-	while (traveller)
-	{
-		if (head->content > traveller->content)
+		if (tmp->content > tmp->next->content)
 			return (0);
-		head = head->next;
-		traveller = traveller->next;
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+int	check_sorting_a(t_list **stack1, int count)
+{
+	int	len;
+
+	len = ft_lstsize(*stack1);
+	if (len != count)
+		return (0);
+	if (check_sorting(stack1) == 0)
+		return (0);
+	return (1);
+}
+
+t_list	*find_min_lst(t_list **stack)
+{
+	t_list	*min;
+	t_list	*tmp;
+
+	min = *stack;
+	tmp = *stack;
+	while (tmp)
+	{
+		if (tmp->content < min->content)
+			min = tmp;
+		tmp = tmp->next;
+	}
+	return (min);
+}
+
+t_list	*find_max_lst(t_list **stack)
+{
+	t_list	*max;
+	t_list	*tmp;
+
+	max = *stack;
+	tmp = *stack;
+	while (tmp)
+	{
+		if (tmp->content > max->content)
+			max = tmp;
+		tmp = tmp->next;
+	}
+	return (max);
+}
+
+int	isrevsorted(t_swap	*tab)
+{
+	t_list	*tmp;
+
+	tmp = tab->stack_a;
+	while (tmp->next)
+	{
+		if (tmp->content < tmp->next->content)
+			return (0);
+		tmp = tmp->next;
 	}
 	return (1);
 }

@@ -6,117 +6,123 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 17:30:54 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/06 20:41:32 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/09/02 19:51:42 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sort_short(t_list **stacka, t_list **stackb)
+void	begin_sorting(t_list **stack1, t_list **stack2, t_push *push, int count)
 {
-	int		size;
+	int	i;
 
-	(void)stackb;
-	size = ft_lstsize (*stacka);
-	//printf ("%d\n", size);
-	if (size == 2)
-		ft_sort2(stacka);
-	if (size == 3)
-		ft_sort3(stacka);
-	if (size == 4)
-		ft_sort4(stacka, stackb);
-	if (size == 5)
-		ft_sort5(stacka, stackb);
-	return ;
-}
-
-void	ft_sort2(t_list **stacka)
-{
-	t_list	*head;
-	t_list	*traveller;
-
-	//print_list(*stacka);
-	head = *stacka;
-	traveller = head -> next;
-	if (head->content > traveller ->content)
-		sa(stacka);
-	return ;
-}
-
-void	ft_sort3(t_list **stacka)
-{
-	t_list	*head;
-	t_list	*traveller;
-	t_list	*traveller2;
-
-	head = *stacka;
-	traveller = head->next;
-	traveller2 = traveller->next;
-	//print_list(*stacka);
-	if (head->content > traveller->content)
+	i = -1;
+	while (++i < count)
 	{
-		sa(stacka);
-		if (head->content > traveller2->content)
+		if ((*stack1)->index <= push->mid)
+			pb(stack1, stack2);
+		else
 		{
-			rra(stacka);
-			ft_sort2(stacka);
+			if (ft_lstsize(*stack2) > 1 && (*stack2)->index < (push->mid / 2))
+				rr(stack1, stack2);
+			else
+				ra(stack1);
 		}
 	}
-	else if (traveller->content > traveller2->content)
-	{
-		rra(stacka);
-		ft_sort2(stacka);
-	}
-	return ;
+	push->max = push->mid;
+	push->mid = (push->max - push->next) / 2 + push->next;
+	push->flag++;
 }
 
-void	ft_sort4(t_list **stacka, t_list **stackb)
+void	find_next(t_list **stack1, t_list **stack2, t_push *push)
 {
-	t_list	*head;
-	long	max;
-
-	head = *stacka;
-	max = (long)head->content;
-	while (head)
+	if (ft_lstsize(*stack2) > 0 && ((*stack2)->index == push->next))
+		pa(stack1, stack2);
+	else if ((*stack1)->index == push->next)
 	{
-		if (max < (long)head->content)
-			max = (long)head->content;
-		head = head->next;
+		(*stack1)->flag = -1;
+		ra(stack1);
+		push->next++;
 	}
-	head = *stacka;
-	while ((long)head->content != max)
-		head = head->next;
-	while (head->next != NULL)
-		rra(stacka);
-	rra(stacka);
-	pb(stacka, stackb);
-	ft_sort3(stacka);
-	pa(stacka, stackb);
-	ra(stacka);
-	return ;
+	else if ((ft_lstsize(*stack2)) > 2
+		&& ft_lstlast(*stack2)->index == push->next)
+		rrb(stack2);
+	else if ((*stack1)->next->index == push->next)
+		sa(stack1);
+	else if ((ft_lstsize(*stack1)) > 1 && ((*stack1)->next->index == push->next)
+		&& ((*stack2)->next->index == push->next + 1))
+		ss(stack1, stack2);
+	else
+		return ;
+	find_next(stack1, stack2, push);
 }
 
-void	ft_sort5(t_list **stacka, t_list **stackb)
+void	quick_a(t_list **stack1, t_list **stack2, t_push *push)
 {
-	t_list	*head;
-	long	min;
+	int	count_b;
+	int	i;
 
-	head = *stacka;
-	min = (long)head->content;
-	while (head)
+	i = -1;
+	count_b = ft_lstsize(*stack2);
+	while (ft_lstsize(*stack2) && ++i < count_b)
 	{
-		if (min > (long)head->content)
-			min = (long)head->content;
-		head = head->next;
+		if ((*stack2)->index == push->next)
+			find_next(stack1, stack2, push);
+		else if ((*stack2)->index >= push->mid)
+		{
+			(*stack2)->flag = push->flag;
+			pa(stack1, stack2);
+		}
+		else if ((*stack2)->index < push->mid)
+			rb(stack2);
 	}
-	head = *stacka;
-	while ((long)head->content != min)
-		head = head->next;
-	while (head->next != NULL)
-		rra(stacka);
-	rra(stacka);
-	pb(stacka, stackb);
-	ft_sort4(stacka, stackb);
-	pa(stacka, stackb);
-	return ;
+	push->max = push->mid;
+	push->mid = (push->max - push->next) / 2 + push->next;
+	push->flag++;
+}
+
+void	quick_b(t_list **stack1, t_list **stack2, t_push *push)
+{
+	int	now_flag;
+
+	now_flag = (*stack1)->flag;
+	if ((*stack1)->flag != 0)
+	{
+		while ((*stack1)->flag == now_flag)
+		{
+			if ((*stack1)->index != push->next)
+				pb(stack1, stack2);
+			find_next(stack1, stack2, push);
+		}
+	}
+	else if ((*stack1)->flag == 0)
+	{
+		while ((*stack1)->flag != -1)
+		{
+			if ((*stack1)->index != push->next)
+				pb(stack1, stack2);
+			find_next(stack1, stack2, push);
+		}
+	}
+	if (ft_lstsize(*stack2))
+		push->max = (find_max_lst(stack2))->index;
+	push->mid = (push->max - push->next) / 2 + push->next;
+}
+
+void	quick_sort(t_list **stack1, t_list **stack2, int count)
+{
+	t_push	push;
+
+	push.next = find_min_lst(stack1)->index;
+	push.max = find_max_lst(stack1)->index;
+	push.mid = push.max / 2 + push.next;
+	push.flag = 0;
+	begin_sorting(stack1, stack2, &push, count);
+	while (!(check_sorting_a(stack1, count)))
+	{
+		if (ft_lstsize(*stack2) == 0)
+			quick_b(stack1, stack2, &push);
+		else
+			quick_a(stack1, stack2, &push);
+	}
 }

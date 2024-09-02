@@ -6,7 +6,7 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 17:09:58 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/12 19:54:47 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/09/02 19:57:43 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,43 @@
 # define PUSH_SWAP_H
 
 # include "../libft/libft.h"
-# include <stdio.h>
+# include <limits.h>
 
-int		main(int ac, char **av);
-t_list	*ft_filllist_a(long arg);
-void	ft_error(int code);
-void	print_list(t_list *head);
-t_list	**ft_checkinput(int ac, char **av);
-int		ft_isnumber(char *arg);
-long	ft_atoi(const char *str);
-void	ft_sortlist(t_list **stacka);
-t_list	**ft_createstackb(t_list **stacka);
-void	ft_algo(t_list **stacka, t_list **stackb);
-int		ft_issorted(t_list **stack);
+typedef struct s_push
+{
+	int	next;
+	int	max;
+	int	mid;
+	int	flag;
+}	t_push;
 
-//sort_short
+typedef struct s_swap
+{
+	t_list	*stack_a;
+	t_list	*stack_b;
+	int		asize;
+	int		bsize;
+}		t_swap;
 
-void	ft_sort_short(t_list **stacka, t_list **stackb);
-void	ft_sort2(t_list **stacka);
-void	ft_sort3(t_list **stacka);
-void	ft_sort4(t_list **stacka, t_list **stackb);
-void	ft_sort5(t_list **stacka, t_list **stackb);
+void	check_sort(t_swap	*tab);
+int		check_sorting(t_list **stack1);
+int		check_sorting_a(t_list **stack1, int count);
+t_list	*find_min_lst(t_list **stack);
+t_list	*find_max_lst(t_list **stack);
+int		isrevsorted(t_swap	*tab);
 
-//swap files
+void	pa(t_list **stack1, t_list **stack2);
+void	pb(t_list **stack1, t_list **stack2);
+void	ra(t_list **stack1);
+void	rb(t_list **stack2);
+void	rr(t_list **stack1, t_list **stack2);
+void	sa(t_list **stack1);
+void	sb(t_list **stack2);
+void	ss(t_list **stack1, t_list **stack2);
+void	rrb(t_list **stack2);
+void	rra(t_list **stack1);
 
-int		swap(t_list **stack);
-int		sa(t_list **stacka);
-int		sb(t_list **stackb);
-int		ss(t_list **stacka, t_list **stackb);
+void	add_index(t_list *lst);
 
-//push files
-
-int		push(t_list **stack1, t_list **stack2);
-int		pa(t_list **stacka, t_list **stackb);
-int		pb(t_list **stacka, t_list **stackb);
-
-//rotate files
-
-int		rotate(t_list **stack);
-int		ra(t_list **stacka);
-int		rb(t_list **stackb);
-int		rr(t_list **stacka, t_list **stackb);
-
-//reverse rotate files
-
-int		reverse_rotate(t_list **stack);
-int		rra(t_list **stacka);
-int		rrb(t_list **stackb);
-int		rrr(t_list **stacka, t_list **stackb);
-
+void	quick_sort(t_list **stack1, t_list **stack2, int count);
 #endif

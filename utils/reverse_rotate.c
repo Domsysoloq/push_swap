@@ -6,51 +6,36 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 18:36:33 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/05 17:24:51 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:08:08 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	reverse_rotate(t_list **stack)
+static void	ft_rr(t_list **stack)
 {
-	t_list	*head;
-	t_list	*traveller;
+	t_list	*tmp;
+	t_list	*end;
 
-	if (ft_lstsize(*stack) < 2)
-		return (-1);
-	head = *stack;
-	traveller = ft_lstlast(head);
-	while (head -> next != traveller)
-		head = head -> next;
-	traveller -> next = *stack;
-	*stack = traveller;
-	head -> next = NULL;
-	return (0);
+	if (!(*stack) || !((*stack)->next))
+		return ;
+	tmp = *stack;
+	end = ft_lstlast(*stack);
+	while ((*stack)->next->next)
+		*stack = (*stack)->next;
+	end->next = tmp;
+	(*stack)->next = NULL;
+	*stack = end;
 }
 
-int	rra(t_list **stacka)
+void	rra(t_list **stack1)
 {
-	if (reverse_rotate(stacka) == -1)
-		return (-1);
-	ft_putendl_fd("rra", 1);
-	return (0);
+	ft_rr(stack1);
+	write(1, "rra\n", 4);
 }
 
-int	rrb(t_list **stackb)
+void	rrb(t_list **stack2)
 {
-	if (reverse_rotate(stackb) == -1)
-		return (-1);
-	ft_putendl_fd("rrb", 1);
-	return (0);
-}
-
-int	rrr(t_list **stacka, t_list **stackb)
-{
-	if (reverse_rotate(stacka) == -1)
-		return (-1);
-	if (reverse_rotate(stackb) == -1)
-		return (-1);
-	ft_putendl_fd("rrr", 1);
-	return (0);
+	ft_rr(stack2);
+	write(1, "rrb\n", 4);
 }

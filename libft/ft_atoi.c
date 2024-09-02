@@ -6,29 +6,32 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 17:58:43 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/05/31 17:32:09 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:05:06 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atoi2(const char *str)
+long	ft_atoi(char *str)
 {
-	long	resultat;
-	long	signe;
+	long	i;
+	long	sign;
+	long	nb;
 
-	signe = 1;
-	resultat = 0;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-')
-		signe *= -1;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
+	nb = 0;
+	sign = 1;
+	i = 0;
+	while ((str[i] == '\n' || str[i] == '\t' || str[i] == ' ' )
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		i++;
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		resultat = resultat * 10 + *str - '0';
-		str++;
+		nb = nb * 10 + (str[i] - '0');
+		i++;
 	}
-	return (resultat * signe);
+	return (nb * sign);
 }

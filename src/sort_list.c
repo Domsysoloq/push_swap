@@ -6,48 +6,76 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:02:00 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/12 19:39:11 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/09/02 19:52:10 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sortlist(t_list **stacka)
+void	sort_3nbr(t_swap *tab)
 {
-	t_list	**stackb;
+	t_list	*last;
 
-	if (ft_issorted(stacka) == 1)
-		ft_error(5);
-	stackb = ft_createstackb(stacka);
-	//print_list(*stacka);
-	//print_list(*stackb);
-	if ((ft_lstsize(*stacka) -1 <= 5))
-		ft_sort_short(stacka, stackb);
-	/*else
-		ft_algo(stacka, stackb);*/
-	//print_list(*stacka);
-	//print_list(*stackb);
-	return ;
+	if (check_sorting(&tab->stack_a))
+		return ;
+	last = ft_lstlast(tab->stack_a);
+	if (isrevsorted(tab))
+	{
+		sa(&tab->stack_a);
+		rra(&tab->stack_a);
+	}
+	else if (tab->stack_a->content < last->content
+		&& tab->stack_a->next->content < last->content)
+		sa(&tab->stack_a);
+	else if (tab->stack_a->content > last->content
+		&& tab->stack_a->next->content < last->content)
+		ra(&tab->stack_a);
+	else if (tab->stack_a->content < last->content
+		&& tab->stack_a->next->content > last->content)
+	{
+		sa(&tab->stack_a);
+		ra(&tab->stack_a);
+	}
+	else if (tab->stack_a->content > last->content
+		&& tab->stack_a->next->content > last->content)
+		rra(&tab->stack_a);
 }
 
-t_list	**ft_createstackb(t_list **stacka)
+void	sort_5nbr(t_swap	*tab)
 {
-	t_list	*head;
-	t_list	*traveller;
-	int		count;
-	t_list	**head_ptr;
-	
-	head_ptr = (t_list **)malloc(sizeof(t_list *));
-	if (!head_ptr)
-    	ft_error(3);
-	count = 0;
-	head = ft_lstnew((long*)0);
-	while (count < (ft_lstsize(*stacka) - 1))
+	int	len;
+
+	len = ft_lstsize(tab->stack_a);
+	while (len--)
 	{
-		traveller = ft_lstnew((long*)0);
-		ft_lstadd_front(&head, traveller);
-		count++;
+		if (tab->stack_a->index == 0 || tab->stack_a->index == 1)
+			pb(&tab->stack_a, &tab->stack_b);
+		else
+			ra(&tab->stack_a);
 	}
-	*head_ptr = head;
-	return (head_ptr);
+	sort_3nbr(tab);
+	pa(&tab->stack_a, &tab->stack_b);
+	pa(&tab->stack_a, &tab->stack_b);
+	if (tab->stack_a->content > tab->stack_a->next->content)
+		sa(&tab->stack_a);
+}
+
+void	check_sort(t_swap	*tab)
+{
+	int	len;
+
+	len = ft_lstsize(tab->stack_a);
+	if (check_sorting(&tab->stack_a))
+		return ;
+	if (len == 2)
+	{
+		if (tab->stack_a->content > tab->stack_a->next->content)
+			sa(&tab->stack_a);
+	}
+	else if (len == 3)
+		sort_3nbr(tab);
+	else if (len == 5)
+		sort_5nbr(tab);
+	else
+		quick_sort(&tab->stack_a, &tab->stack_b, ft_lstsize(tab->stack_a));
 }

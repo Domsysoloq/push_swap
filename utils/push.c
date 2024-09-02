@@ -6,51 +6,34 @@
 /*   By: lcroxatt <lcroxatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 18:37:44 by lcroxatt          #+#    #+#             */
-/*   Updated: 2024/06/03 18:37:58 by lcroxatt         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:07:26 by lcroxatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	push(t_list **stack1, t_list **stack2)
+void	pa(t_list **stack1, t_list **stack2)
 {
-	t_list	*traveller;
-	t_list	*head1;
-	t_list	*head2;
+	t_list	*push_b;
 
-	if (ft_lstsize(*stack1) == 0)
-		return (-1);
-	head1 = *stack1;
-	head2 = *stack2;
-	traveller = head1;
-	head1 = head1 -> next;
-	*stack1 = head1;
-	if (!head2)
-	{
-		head2 = traveller;
-		head2 -> next = NULL;
-		*stack2 = head2;
-	}
-	else
-	{
-		traveller -> next = head2;
-		*stack2 = traveller;
-	}
-	return (0);
+	if (!*stack2)
+		return ;
+	push_b = (*stack2)->next;
+	(*stack2)->next = *stack1;
+	*stack1 = *stack2;
+	*stack2 = push_b;
+	ft_putstr_fd("pa\n", 1);
 }
 
-int	pa(t_list **stacka, t_list **stackb)
+void	pb(t_list **stack1, t_list **stack2)
 {
-	if (push(stackb, stacka) == -1)
-		return (-1);
-	ft_putendl_fd("pa", 1);
-	return (0);
-}
+	t_list	*push_a;
 
-int	pb(t_list **stacka, t_list **stackb)
-{
-	if (push(stacka, stackb) == -1)
-		return (-1);
-	ft_putendl_fd("pb", 1);
-	return (0);
+	if (!*stack1)
+		return ;
+	push_a = (*stack1)->next;
+	(*stack1)->next = *stack2;
+	*stack2 = *stack1;
+	*stack1 = push_a;
+	ft_putstr_fd("pb\n", 1);
 }
