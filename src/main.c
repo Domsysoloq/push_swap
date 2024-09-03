@@ -36,6 +36,40 @@ int	ft_check(t_list *lst, int n, char *nbr)
 	return (1);
 }
 
+
+void	free_all(t_swap *tab, char **args)
+{
+    if (!tab)
+        return;
+    ft_lstclear(tab->stack_a);
+	ft_lstclear(tab->stack_b);
+    free(tab);
+	free_args(args);
+}
+
+void	ft_lstclear(t_list *lst)
+{
+	t_list	*tmp;
+	while (lst)
+	{
+		tmp = lst;
+		lst = lst->next;
+		free(tmp);
+	}
+}
+void	free_args(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i] != NULL)
+	{
+		free(args[i]);
+		i++;
+	}
+	free(args);
+}
+
 t_list	*ft_init(char **ag, int ac)
 {
 	t_list	*tmp;
@@ -53,6 +87,7 @@ t_list	*ft_init(char **ag, int ac)
 		nbr = ft_atoi(ag[i]);
 		if (nbr > INT_MAX || nbr < INT_MIN || ft_check(res, nbr, ag[i]) == 0)
 		{
+			ft_lstclear(res);
 			ft_putstr_fd("Error\n", 2);
 			return (NULL);
 		}
@@ -80,10 +115,14 @@ int	main(int ac, char **ag)
 		args = ag;
 	tab->stack_a = ft_init(args, ac);
 	if (tab->stack_a == NULL)
+	{
+		free_all(tab, args);
 		return (-1);
+	}
 	tab->stack_b = NULL;
 	tab->asize = ft_lstsize(tab->stack_a);
 	tab->bsize = ft_lstsize(tab->stack_b);
 	add_index(tab->stack_a);
 	check_sort(tab);
+	free_all(tab, args);
 }
