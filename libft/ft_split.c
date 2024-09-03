@@ -12,72 +12,80 @@
 
 #include "libft.h"
 
-size_t	resultsize(char const *string, char sep)
+static int	count_words(char const *s, char c)
 {
-	size_t	i;
-	size_t	resultsize;
+	int		count;
+	int		i;
 
-	resultsize = 0;
 	i = 0;
-	while (string[i] != '\0')
+	count = 0;
+	while (s[i])
 	{
-		if (string[i] != sep)
-		{
-			resultsize++;
-			while (string[i] != sep && string[i] != '\0')
-				i++;
-		}
-		if (string[i] != '\0')
+		while (s[i] == c)
+			i++;
+		if (s[i] != c && s[i])
+			count++;
+		while (s[i] != c && s[i])
 			i++;
 	}
-	return (resultsize);
+	return (count);
 }
 
-size_t	strsize(const char *string, char sep, size_t start)
+static void	ft_free_tab(char **tab)
 {
-	size_t	result;
+	char	**pos;
 
-	result = 0;
-	while (string[start] != sep && string[start] != '\0')
+	if (tab == NULL)
+		return ;
+	pos = tab;
+	while (*pos != NULL)
+		free(*(pos++));
+	free(tab);
+}
+
+static char	*ft_str(char const *s, char c)
+{
+	int		i;
+	char	*ptr;
+
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	ptr = malloc(sizeof(char) * (i + 1));
+	if (!(ptr))
 	{
-		result++;
-		start++;
+		free(ptr);
+		return (NULL);
 	}
-	return (result);
-}
-
-int	checkinput(char const *s)
-{
-	if (!s)
-		return (1);
-	return (0);
+	ft_strlcpy(ptr, s, i + 1);
+	return (ptr);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	iresult;
-	size_t	i2;
-	char	**result;
+	int		i;
+	int		strs_len;
+	char	**ptr;
 
-	if (checkinput(s) == 1)
+	if (!s)
+		return (0);
+	strs_len = count_words(s, c);
+	ptr = ft_calloc(sizeof(char *), (strs_len + 1));
+	if (!(ptr))
 		return (NULL);
-	iresult = 0;
-	i = 0;
-	i2 = 0;
-	result = (char **) malloc((resultsize(s, c) + 1) * sizeof(char *));
-	if (!result)
-		return (NULL);
-	while (iresult < resultsize(s, c))
+	i = -1;
+	while (++i < strs_len)
 	{
-		if (s[i] != c && s[i] != '\0')
+		while (s[0] == c)
+			s++;
+		ptr[i] = ft_str(s, c);
+		if (!(ptr[i]))
 		{
-			result[iresult] = ft_substr(s, i, strsize(s, c, i));
-			i += strsize(s, c, i);
-			iresult++;
+			ft_free_tab(ptr);
+			return (NULL);
 		}
-		i++;
+		s += ft_strlen(ptr[i]);
 	}
-	result[iresult] = NULL;
-	return (result);
+	ptr[i] = 0;
+	return (ptr);
 }

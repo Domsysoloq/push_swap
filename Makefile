@@ -1,9 +1,10 @@
+# Variables
 CC = gcc
 CFLAGS = -Wextra -Wall -Werror -Iincludes
 NAME = push_swap
 SRCS =	$(wildcard src/*.c utils/*.c)
-CHECK_SRCS = $(wildcard utils/*.c) src/in
 CFLAGSLLDB = -g -Wextra -Wall -Werror -Iincludes
+LEAKCHECK_FLAGS = -g
 
 # Creating object files (.o files)
 OBJS = $(SRCS:.c=.o)
@@ -12,39 +13,39 @@ OBJS = $(SRCS:.c=.o)
 %.o: %.c
 	@${CC} ${CFLAGS} -c $< -o $@
 
-# Launching variable NAME
+# Default target to build the project
 all: ${NAME}
 
-# Creating an archive composed of the .o files
+# Link the object files into the final executable
 ${NAME}: ${OBJS}
 	@make -C ./libft
 	@echo "Compiling ${NAME}"
 	@${CC} ${CFLAGS} ${OBJS} ./libft/libft.a -o ${NAME}
 
-# For testing
+# For testing with LLDB (debugging)
 lldb: ${OBJS}
 	@make -C ./libft
 	@${CC} ${CFLAGSLLDB} ${OBJS} ./libft/libft.a -o ${NAME}
 	@make clean
 
+# Compile with debug flags and prepare for Valgrind leak check
+leakcheck: CFLAGS += ${LEAKCHECK_FLAGS}
+leakcheck: re
 
-#Removes every .o files
-
+# Clean object files
 clean :	
 	@make -C ./libft fclean
 	@rm -rf ${OBJS}
 
-#Removes every .o file and the .a file
-
+# Clean object files and the executable
 fclean : clean
 	@rm -rf ${NAME}
 
-#Removes every .o file, the .a file and recreates everything (useful if an update is needed)
-
+# Clean and rebuild everything
 re : fclean all
 
-#Necessary to tell to the Makefile that these should not be interpreted as files, but as rules. It allows these rules to be executed no matter what.
+# Ensure these targets are not treated as files
+.PHONY: all clean fclean re lldb leakcheck
 
-.PHONY: all clean fclean re lldb
 
 
