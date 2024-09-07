@@ -24,7 +24,7 @@ int	ft_check(t_list *lst, int n, char *nbr)
 		if (!(((nbr[i] == '-' || nbr[i] == '+') && ft_isdigit(nbr[i + 1])
 					&& (i == 0 || !ft_isdigit(nbr[i - 1])))
 				|| ft_isdigit(nbr[i])))
-				return (0);
+			return (0);
 		i++;
 	}
 	while (tmp)
@@ -34,40 +34,6 @@ int	ft_check(t_list *lst, int n, char *nbr)
 		tmp = tmp->next;
 	}
 	return (1);
-}
-
-
-void	free_all(t_swap *tab, char **args)
-{
-    if (!tab)
-        return;
-    ft_lstclear(tab->stack_a);
-	ft_lstclear(tab->stack_b);
-    free(tab);
-	free_args(args);
-}
-
-void	ft_lstclear(t_list *lst)
-{
-	t_list	*tmp;
-	while (lst)
-	{
-		tmp = lst;
-		lst = lst->next;
-		free(tmp);
-	}
-}
-void	free_args(char **args)
-{
-	int	i;
-
-	i = 0;
-	while (args[i] != NULL)
-	{
-		free(args[i]);
-		i++;
-	}
-	free(args);
 }
 
 t_list	*ft_init(char **ag, int ac)
